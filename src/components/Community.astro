@@ -12,17 +12,17 @@ const lang = getLangFromUrl(Astro.url)
 const t = useTranslations(lang)
 ---
 
-<section id="events" class="text-primary flex w-full flex-col items-center justify-center gap-11 pt-32 dark:text-white">
+<section id="events" class="text-primary flex w-full flex-col items-center justify-center gap-16 pt-32 dark:text-white">
   <!-- Título -->
-  <div class="flex flex-col items-center gap-8 px-4 text-center">
-    <h2 class="text-5xl font-bold drop-shadow-md">{t('community.title')}</h2>
-    <p class="text-lg md:text-xl">
+  <hgroup class="flex flex-col items-center gap-8 px-4 text-center">
+    <h2 class="text-5xl font-bold drop-shadow-md text-balance">{t('community.title')}</h2>
+    <p class="text-lg md:text-xl text-pretty">
       {t('community.paragraph')}
     </p>
-  </div>
+  </hgroup>
 
   <!-- Columnas -->
-  <div class="mt-6 flex h-[600px] w-full justify-center gap-6 overflow-hidden px-8">
+  <div class="flex h-[600px] w-full justify-center gap-6 overflow-hidden px-8 mask-y-from-80% mask-y-to-100%">
     <div class="scroll-column scroll-left flex flex-col gap-4" data-direction="down">
       {col1.map((user, i) => <UserCard user={user} key={`col1-${i}`} />)}
     </div>
@@ -35,11 +35,9 @@ const t = useTranslations(lang)
   </div>
 
   <!-- Botón -->
-  <div class="z-20 mt-12">
-    <Link asButton to="#conocenos">
-      {t('community.button')}
-    </Link>
-  </div>
+  <Link asButton to="#conocenos">
+    {t('community.button')}
+  </Link>
 </section>
 
 <script is:inline src="/js/scroll_loop.js" defer></script>
