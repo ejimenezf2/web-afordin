@@ -3,11 +3,11 @@ import Link from './Link.astro'
 ---
 
 <section
-  class="relative z-10 mt-24 flex aspect-video w-full flex-col items-center gap-10 pt-24 text-center lg:pt-40 xl:pt-48 2xl:pt-80"
+  class="relative z-10 mt-24 min-h-[calc(100dvh-(--spacing(32)))] lg:min-h-dvh w-full flex flex-col items-center justify-center gap-10 text-center px-6 pt-40 pb-20"
 >
-  <hgroup class="flex flex-col items-center gap-4 text-shadow-lg/20">
-    <h2 class="font-calsans text-5xl tracking-[2.5px] xl:text-7xl">¿A qué estás esperando?</h2>
-    <p class="text-base xl:text-xl">Descubre lo que podemos crear juntos</p>
+  <hgroup class="flex flex-col items-center gap-4 text-shadow-lg/20 text-white">
+    <h2 class="text-final-cta-title font-calsans tracking-[2.5px] text-balance">¿A qué estás esperando?</h2>
+    <p class="text-final-cta-paragraph text-pretty">Descubre lo que podemos crear juntos</p>
   </hgroup>
   <Link
     class="px-6 py-3 text-base font-semibold shadow-md/25"
@@ -16,7 +16,7 @@ import Link from './Link.astro'
     to="https://discord.com/invite/comuafor">¡Empezar a crear!</Link
   >
   <video
-    class="pointer-events-none top-0 left-0 -z-10 aspect-video w-full md:absolute md:mask-none"
+    class="pointer-events-none absolute inset-0 -z-10 size-full object-cover"
     src="/media/footer.webm"
     preload="metadata"
     autoplay
@@ -26,11 +26,7 @@ import Link from './Link.astro'
 </section>
 
 <style>
-  section {
-    mask: linear-gradient(to bottom, transparent 0%, black 20%);
-
-    video {
-      mask: inherit;
-    }
+  video {
+    mask: linear-gradient(to bottom, transparent 0%, black calc(var(--spacing) * 36));
   }
 </style>
