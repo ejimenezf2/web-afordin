@@ -10,10 +10,10 @@ const t = useTranslations(lang)
 const twitchSubs = await getTwitchSubs()
 ---
 
-<section id="contributor" class="flex flex-col gap-10 pt-32 text-center">
+<section id="contributor" class="flex flex-col gap-10 pt-32 px-6 text-center">
   <hgroup class="flex flex-col gap-4 text-center">
-    <h2 class="text-[40px] font-bold">{t('contributtors.title')}</h2>
-    <p class="text-lg font-medium">{t('contributtors.paragraph')}</p>
+    <h2 class="text-[40px] font-bold text-balance">{t('contributtors.title')}</h2>
+    <p class="text-lg font-medium text-pretty">{t('contributtors.paragraph')}</p>
   </hgroup>
   <article
     class="grid w-full grid-cols-[repeat(auto-fill,minmax(80px,_1fr))] gap-2 sm:grid-cols-[repeat(auto-fill,minmax(120px,_1fr))]"
@@ -22,7 +22,7 @@ const twitchSubs = await getTwitchSubs()
       mods.map((mod) => {
         return (
           <div class="group relative">
-            <div title="title" class="absolute -top-8 left-0 hidden rounded-md bg-slate-800 px-4 group-hover:block">
+            <div title="title" class="absolute -top-8 left-0 hidden rounded-md bg-slate-800 text-white px-4 group-hover:block z-10">
               {mod.name}
             </div>
 
@@ -46,7 +46,7 @@ const twitchSubs = await getTwitchSubs()
         twitchSubs.subscribers.map((sub: any) => {
           return (
             <div class="group relative">
-              <div title="title" class="absolute -top-8 left-0 hidden rounded-md bg-slate-800 px-4 group-hover:block">
+              <div title="title" class="absolute -top-8 left-0 hidden rounded-md bg-slate-800 text-white px-4 group-hover:block z-10">
                 {sub.display_name || sub.user_name}
               </div>
 
