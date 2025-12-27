@@ -1,0 +1,23 @@
+---
+interface Props {
+  imageSrc: string
+  imageAlt: string
+  title: string
+  paragraph: string
+  gradient: string
+}
+
+const { imageSrc, imageAlt, title, paragraph, gradient } = Astro.props
+---
+
+<div class:list={['card', gradient]}>
+  <img src={imageSrc} alt={imageAlt} loading="lazy" class="card-img" />
+  <div class="card-content">
+    <h3 class="text-primary text-xl font-bold capitalize sm:text-base md:text-lg dark:text-white">
+      {title}
+    </h3>
+    <p class="text-primary/80 text-sm leading-relaxed font-light sm:text-xs md:text-xs dark:text-white/80">
+      {paragraph}
+    </p>
+  </div>
+</div>

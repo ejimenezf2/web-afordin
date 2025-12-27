@@ -1,0 +1,300 @@
+@import 'tailwindcss';
+
+:root {
+  --svg-animation-fill: #100e14;
+  --svg-pattern-bg-image-color: rgba(213, 204, 226, 0.25);
+
+  #square-pattern {
+    z-index: 0;
+    background-size: 18px 18px;
+    background-image:
+      linear-gradient(to bottom, var(--svg-pattern-bg-image-color) 1px, transparent 1px),
+      linear-gradient(to right, var(--svg-pattern-bg-image-color) 1px, transparent 1px);
+    mask-image: linear-gradient(to right, transparent 10%, black 50%, transparent 90%);
+  }
+}
+
+@theme {
+  --font-calsans: 'Cal Sans', sans-serif;
+  --font-manrope: 'Manrope', sans-serif;
+
+  --text-hero-title: clamp(2.5rem, 5vw, 4rem);
+  --text-hero-title--font-weight: 700;
+  --text-hero-title--line-height: 1.3;
+  --text-hero-paragraph: clamp(1.25rem, 2vw, 1.5rem);
+  --text-hero-paragraph--line-height: 1.2;
+
+  --text-final-cta-title: clamp(2.25rem, 5vw, 3.5rem);
+  --text-final-cta-title--font-weight: 700;
+  --text-final-cta-title--line-height: 1.3;
+  --text-final-cta-paragraph: clamp(1rem, 2vw, 1.125rem);
+  --text-final-cta-paragraph--line-height: 1.2;
+
+  --color-primary: #100e14;
+  --gradient-rainbow: 115deg, #ff85e4 0%, #ffe985 24%, #85ff85 49%, #85bbff 75%, #bc85ff 100%;
+
+  --animate-salute: salute 1200ms ease-in-out forwards;
+
+  /* FONTSIZES */
+  --text-7xl: 3.5rem; /* 56px */
+  --text-7xl--line-height: 3.5rem; /* 56px */
+  --text-7xl--font-weight: 700;
+
+  --text-6xl: 2.5rem; /* 40px */
+  --text-6xl--line-height: 2.5rem; /* 40px */
+  --text-6xl--font-weight: 700;
+
+  --text-5xl: 2.25rem; /* 36px */
+  --text-5xl--line-height: 2.25rem; /* 36px */
+  --text-5xl--font-weight: 700;
+
+  --text-4xl: 2rem; /* 32px */
+  --text-4xl--line-height: 2.5rem; /* 40px */
+  --text-4xl--font-weight: 700;
+
+  --text-2xl: 1.25rem; /* 20px */
+  --text-2xl--line-height: 1.75rem; /* 28px */
+  --text-2xl--font-weight: 500;
+
+  --text-hero: 1.5rem; /* 24px */
+  --text-hero--line-height: 2.25rem; /* 36px */
+  --text-hero--font-weight: 400;
+
+  --text-3xl: 1.5rem; /* 24px */
+  --text-3xl--line-height: 2.25rem; /* 36px */
+  --text-3xl--font-weight: 400;
+
+  --text-xl: 1.125rem; /* 18px */
+  --text-xl--line-height: 1.5rem; /* 24px */
+  --text-xl--font-weight: 400;
+
+  --text-base: 1rem; /* 16px */
+  --text-base--line-height: 1.5rem; /* 24px */
+  --text-base--font-weight: 400;
+
+  --text-sm: 0.875rem; /* 14px */
+  --text-sm--line-height: 1.25rem; /* 20px */
+  --text-sm--letter-spacing: -0.0125rem; /* -0.2px */
+  --text-sm--font-weight: 400;
+
+  --text-button-lg: 1rem; /* 16px */
+  --text-button-lg--line-height: 1.5rem; /* 24px */
+  --text-button-lg--font-weight: 500;
+}
+
+@layer components {
+  .btn {
+    @apply font-manrope bg-primary relative z-[1] inline-block overflow-hidden rounded-full px-10 py-5 text-center font-medium text-white dark:bg-white dark:text-black;
+    transition: all 0.4s ease;
+
+    &::before,
+    &::after {
+      content: '';
+      inset: 0;
+      z-index: -2;
+      position: absolute;
+      transform: scaleX(0);
+      border-radius: inherit;
+      transform-origin: center;
+      transition: transform 1s ease;
+    }
+
+    &::before {
+      background-color: #f4bbf7;
+      transition-duration: 1000ms;
+    }
+
+    &::after {
+      background: linear-gradient(135deg, #fff, #f66a99);
+      transition-duration: 700ms;
+    }
+
+    &:hover::before {
+      transform: scaleX(1);
+    }
+
+    &:hover::after {
+      transform: scaleX(1);
+    }
+
+    &:hover {
+      color: #000;
+      box-shadow: 0 0 20px 8px rgba(246, 106, 153, 0.5); /* efecto glow rosado */
+    }
+
+    &:active {
+      animation: click-bounce 0.2s ease-in-out;
+    }
+  }
+
+  @keyframes click-bounce {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(0.95);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+}
+
+@keyframes salute {
+  0% {
+    transform: rotate(0deg);
+  }
+  20% {
+    transform: rotate(-20deg);
+  }
+  40% {
+    transform: rotate(10deg);
+  }
+  60% {
+    transform: rotate(-10deg);
+  }
+  80% {
+    transform: rotate(5deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+@keyframes scroll-up {
+  0% {
+    transform: translateY(0%);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+@keyframes scroll-down {
+  0% {
+    transform: translateY(0%);
+  }
+  100% {
+    transform: translateY(50%);
+  }
+}
+
+.scroll-up {
+  animation: scroll-up 40s linear infinite;
+}
+
+.scroll-down {
+  animation: scroll-down 40s linear infinite;
+}
+
+.mask-gradient {
+  background: linear-gradient(to bottom, black 0%, transparent 20%, transparent 80%, black 100%);
+}
+
+.scroll-column {
+  will-change: transform;
+}
+
+@layer utilities {
+  .stroke-animation path {
+    stroke-dasharray: 240;
+    stroke-dashoffset: 240;
+    animation: draw 2s ease forwards;
+  }
+
+  @keyframes draw {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+}
+
+@-webkit-keyframes animate-svg-fill-1 {
+  0% {
+    fill: transparent;
+  }
+
+  100% {
+    fill: var(--svg-animation-fill);
+  }
+}
+
+@keyframes animate-svg-fill-1 {
+  0% {
+    fill: transparent;
+  }
+
+  100% {
+    fill: var(--svg-animation-fill);
+  }
+}
+/* General fill animation SVG'S */
+@keyframes animate-svg-fill {
+  0% {
+    fill: transparent;
+  }
+
+  100% {
+    fill: var(--svg-animation-fill);
+  }
+}
+
+@keyframes animate-svg-fill-4 {
+  0% {
+    fill: transparent;
+  }
+
+  100% {
+    fill: var(--svg-animation-fill);
+  }
+}
+
+/* Apply animation to all svg elements */
+.svg-elem-1,
+.svg-elem-2,
+.svg-elem-3,
+.svg-elem-4 {
+  animation: animate-svg-fill 0.8s cubic-bezier(0.215, 0.61, 0.355, 1) both;
+}
+
+/* Delay different animations for each element */
+.svg-elem-1 {
+  animation-delay: 0.8s;
+}
+
+.svg-elem-2 {
+  animation-delay: 0.8s;
+}
+
+.svg-elem-3 {
+  animation-delay: 1s;
+}
+
+.svg-elem-4 {
+  animation-delay: 1.1s;
+}
+.svg-elem-1 {
+  -webkit-animation: animate-svg-fill-1 0.9s cubic-bezier(0.55, 0.055, 0.675, 0.19) 0.9s both;
+  animation: animate-svg-fill-1 0.9s cubic-bezier(0.55, 0.055, 0.675, 0.19) 0.9s both;
+}
+
+/* Start css Values */
+.card {
+  @apply mx-auto flex h-auto max-h-[494px] w-full max-w-[417.5px] transform flex-col rounded-xl border border-white/10 p-0 pt-8 shadow-lg backdrop-blur-md transition-transform hover:scale-105 hover:shadow-xl;
+}
+
+.card-img {
+  @apply h-[294px] w-full rounded-t-xl object-cover;
+}
+
+.card-content {
+  @apply flex flex-1 flex-col px-8 pt-6 pb-8;
+}
+
+/* End css Values */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --svg-animation-fill: rgb(255, 255, 255);
+    --svg-pattern-bg-image-color: rgba(60, 58, 63, 0.25);
+  }
+}

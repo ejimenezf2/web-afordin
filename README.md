@@ -28,7 +28,7 @@ Afordin is the best programming and web design community in the world where crea
   - [🤝 Contribute](#-contribute)
   - [👥 Authors](#-authors)
   - [🛠️ Stack](#️-stack)
-  
+
 ## 🚀 Getting Started
 
 1. Clone or fork this repository
@@ -83,7 +83,7 @@ If you want to contribute to this project, you can do so by reading the [Contrib
 
 **Thanks to all the contributors who have made this project possible!**
 
-[![Contributors](https://contrib.rocks/image?repo=Afordin/web-afordin)](https://github.com/Afordin/web-afordin/graphs/contributors)
+[![Contributors](https://contrib.rocks/image?repo=Afordin/web-afordin&)](https://github.com/Afordin/web-afordin/graphs/contributors)
 
 ## 🛠️ Stack
 

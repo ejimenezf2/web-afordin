@@ -1,0 +1,17 @@
+---
+import type { HTMLAttributes } from 'astro/types'
+
+interface Props extends Omit<HTMLAttributes<'a'>, 'href'> {
+  to: string
+  asButton?: boolean
+  external?: boolean
+}
+
+const { to, asButton = false, external = false, class: classNames, ...restProps } = Astro.props
+const rel = external ? 'noopener noreferrer' : null
+const target = external ? '_blank' : null
+---
+
+<a {rel} {target} href={to} class:list={[{ btn: asButton }, classNames]} {...restProps}>
+  <slot />
+</a>

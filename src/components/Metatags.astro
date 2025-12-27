@@ -1,0 +1,39 @@
+---
+import { BASE_PATH } from '@/data/consts'
+import { Font } from 'astro:assets'
+
+interface Props {
+  title: string
+  description: string
+  themeColor?: string
+  slug?: string
+}
+
+const { description, title, themeColor, slug } = Astro.props
+const canonicalUrl = typeof slug === 'string' ? BASE_PATH + '/' + slug : BASE_PATH
+---
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+<title>{title}</title>
+<meta name="description" content={description} />
+
+<link rel="icon" type="image/svg+xml" href={BASE_PATH + '/favicon.svg'} />
+<link rel="apple-touch-icon" href={BASE_PATH + '/favicon.svg'} />
+{themeColor && <meta name="theme-color" content={themeColor} />}
+
+<link rel="canonical" href={canonicalUrl} />
+
+<meta property="og:title" content={title} />
+<meta property="og:type" content="website" />
+<meta property="og:url" content={BASE_PATH} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={BASE_PATH + '/preview.png'} />
+
+<meta name="twitter:title" content={title} />
+<meta name="twitter:creator" content="@afor_digital" />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content={BASE_PATH + '/preview.png'} />
+<Font cssVariable="--font-manrope" preload />
+<Font cssVariable="--font-calsans" preload />

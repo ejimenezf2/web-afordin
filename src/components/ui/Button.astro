@@ -1,10 +1,11 @@
 ---
-type Props = {
-  href: string
-}
-const { href } = Astro.props
+import type { HTMLAttributes } from 'astro/types'
+
+interface Props extends HTMLAttributes<'button'> {}
+
+const { class: classNames, ...restProps } = Astro.props
 ---
 
-<a href={href} target="_blank" class="font-manrope rounded-full bg-white px-10 py-5 font-medium text-black">
+<button class:list={['btn', classNames]} {...restProps}>
   <slot />
-</a>
+</button>

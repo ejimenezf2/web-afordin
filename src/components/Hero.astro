@@ -1,20 +1,58 @@
 ---
-import Button from '@/components/ui/Button.astro'
+import Link from '@/components/Link.astro'
+import Icon from '@/components/Icon.astro'
+import { getLangFromUrl, useTranslations } from '@/i18n/utils.ts'
+
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
 ---
 
-<section
-  class="relative flex min-h-screen w-full flex-col items-center justify-center gap-11 bg-[url(/Hero.webp)] bg-cover bg-no-repeat"
->
-  <div
-    class="pointer-events-none absolute inset-0 h-full w-full bg-linear-to-b from-transparent from-65% to-[#100E14] to-95%"
-  >
+<section id="home" class="relative z-20 flex min-h-dvh w-full flex-col items-center justify-center gap-10 py-32">
+  <div class="animation rounded-full bg-linear-(--gradient-rainbow) p-0.5">
+    <div
+      class="group text-primary flex items-center gap-3 rounded-full bg-white px-5 py-1 text-base dark:bg-[#100d13] dark:text-white"
+    >
+      <p class="font-manrope font-medium">{t('hero.welcome')} <span class="font-bold">Afordin</span></p>
+      <Icon name="saludate-hand" class="group-hover:animate-salute text-primary h-5 w-4 dark:text-[#FAFAFA]" />
+    </div>
   </div>
-  <div>Bienvenido/a a Afordin</div>
-  <hgroup class="font-aeonik flex flex-col gap-11 px-2 text-center drop-shadow-[0px_4px_13px_rgba(0,0,0,0.25)] lg:px-0">
-    <h1 class="text-hero-title font-bold">
-      Aprende, crea y crece <br /> en nuestra comunidad
+  <hgroup class="flex flex-col gap-10 px-2 text-center text-shadow-lg/20 lg:px-0 text-white">
+    <h1 class="text-hero-title font-calsans tracking-[2.5px] text-balance">
+      {t('hero.title')}
+      <br />
+      {t('hero.title.second')}
     </h1>
-    <p class="text-hero-paragraph">El conocimiento se multiplica cuando lo compartimos</p>
+    <p class="text-hero-paragraph text-pretty">{t('hero.paragraph')}</p>
   </hgroup>
-  <Button href="https://lenguajehtml.com/html/semantica/etiqueta-html-h1/">Crece compartiendo</Button>
+  <Link external asButton to="https://lenguajehtml.com/html/semantica/etiqueta-html-h1/">
+    {t('hero.button')}
+  </Link>
+  <video
+    class="pointer-events-none absolute inset-0 -z-10 size-full object-cover"
+    src="/media/header.webm"
+    preload="metadata"
+    autoplay
+    loop
+    muted
+    playsinline></video>
 </section>
+
+<style>
+  video {
+    mask-image: linear-gradient(to bottom, black calc(100% - var(--spacing) * 60), transparent 100%);
+  }
+
+  @keyframes tag-animation {
+    0% {
+      background-position: 50%;
+    }
+    100% {
+      background-position: 200% 50%;
+    }
+  }
+
+  .animation {
+    background-size: 300% 300%;
+    animation: tag-animation 4s linear infinite;
+  }
+</style>

@@ -1,0 +1,28 @@
+---
+import AboutUs from '@/components/AboutUs.astro'
+import Community from '@/components/Community.astro'
+import Contributors from '@/components/Contributors.astro'
+import Events from '@/components/Events.astro'
+import FinalCTA from '@/components/FinalCTA.astro'
+import Footer from '@/components/Footer.astro'
+import Hero from '@/components/Hero.astro'
+import LastProjects from '@/components/LastProjects.astro'
+import Nav from '@/components/Nav.astro'
+import Values from '@/components/Values.astro'
+import Layout from '@/layouts/Layout.astro'
+---
+
+<Layout title="Afordin Community" description="Que un copywriter se haga una descripción muy chula">
+  <Nav />
+  <Hero />
+  <main class="relative z-10 mx-auto flex w-full max-w-7xl flex-col gap-[120px] pb-20 lg:gap-[240px]">
+    <Values />
+    <AboutUs />
+    <LastProjects />
+    <Events />
+    <Community />
+    <Contributors />
+    <FinalCTA />
+  </main>
+  <Footer />
+</Layout>

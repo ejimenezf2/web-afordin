@@ -1,0 +1,49 @@
+---
+import users from '../data/comunity.json'
+import UserCard from '../components/ui/UserCard.astro'
+import { getLangFromUrl, useTranslations } from '@/i18n/utils'
+import Link from '@/components/Link.astro'
+
+const col1 = users.filter((_, i) => i % 3 === 0)
+const col2 = users.filter((_, i) => i % 3 === 1)
+const col3 = users.filter((_, i) => i % 3 === 2)
+
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
+---
+
+<section id="events" class="text-primary flex w-full flex-col items-center justify-center gap-16 pt-32 dark:text-white">
+  <!-- Título -->
+  <hgroup class="flex flex-col items-center gap-8 px-4 text-center">
+    <h2 class="text-5xl font-bold drop-shadow-md text-balance">{t('community.title')}</h2>
+    <p class="text-lg md:text-xl text-pretty">
+      {t('community.paragraph')}
+    </p>
+  </hgroup>
+
+  <!-- Columnas -->
+  <div class="flex h-[600px] w-full justify-center gap-6 overflow-hidden px-8 mask-y-from-80% mask-y-to-100%">
+    <div class="scroll-column scroll-left flex flex-col gap-4" data-direction="down">
+      {col1.map((user, i) => <UserCard user={user} key={`col1-${i}`} />)}
+    </div>
+    <div class="scroll-column scroll-center flex flex-col gap-4" data-direction="up">
+      {col2.map((user, i) => <UserCard user={user} key={`col2-${i}`} />)}
+    </div>
+    <div class="scroll-column scroll-right flex flex-col gap-4" data-direction="down">
+      {col3.map((user, i) => <UserCard user={user} key={`col3-${i}`} />)}
+    </div>
+  </div>
+
+  <!-- Botón -->
+  <Link asButton to="#conocenos">
+    {t('community.button')}
+  </Link>
+</section>
+
+<script is:inline src="/js/scroll_loop.js" defer></script>
+
+<style>
+  :global(a[href='#conocenos']) {
+    border-radius: 8px !important;
+  }
+</style>

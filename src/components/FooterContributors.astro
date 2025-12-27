@@ -1,0 +1,27 @@
+---
+import type { Contributor, contributorsIcons } from '@/types/index.d'
+import Avatar from '@/components/ui/Avatar.astro'
+
+interface Props {
+  contributors: Array<Contributor>
+}
+
+const { contributors } = Astro.props
+---
+
+<div
+  class="flex h-full w-fit max-w-72 flex-wrap items-center justify-center -space-x-2 gap-y-3.5 pr-8 md:max-w-96 lg:justify-end 2xl:pr-0"
+>
+  {
+    contributors?.map((contributors: Contributor) => {
+      const { html_url, avatar_url, login } = contributors
+      let icon: contributorsIcons = 'linkedin'
+
+      if (contributors.hasOwnProperty('id')) {
+        icon = 'github'
+      }
+
+      return <Avatar url={html_url} avatar={avatar_url} username={login} icon={icon} />
+    })
+  }
+</div>

@@ -1,5 +1,230 @@
 ---
+import Link from '@/components/Link.astro'
+import Icon from '@/components/Icon.astro'
+import LogoIcon from '@/components/ui/LogoIcon.astro'
+import { getLangFromUrl, useTranslations } from '@/i18n/utils.ts'
 
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
+
+const links = [
+  {
+    to: '#',
+    name: t('nav.home'),
+  },
+  {
+    to: '#values',
+    name: t('nav.values'),
+  },
+  {
+    to: '#projects',
+    name: t('nav.projects'),
+  },
+  {
+    to: '#events',
+    name: t('nav.events'),
+  },
+  {
+    to: '#contributor',
+    name: t('nav.contributor'),
+  },
+] as const
+
+const socialLinks = [
+  {
+    to: 'https://www.github.com/Afordin',
+    name: 'github',
+  },
+  {
+    to: 'https://discord.com/invite/comuafor',
+    name: 'discord',
+  },
+  {
+    to: 'https://www.youtube.com/@afor_lives',
+    name: 'youtube',
+  },
+  {
+    to: 'https://www.twitch.tv/afor_digital',
+    name: 'twitch',
+  },
+] as const
 ---
 
-<p class="fixed m-auto my-8 w-full max-w-7xl bg-green-500">Nav</p>
+<header
+  class="font-manrope fixed inset-x-0 top-0 z-50 mx-auto max-h-40 max-w-7xl px-4 transition-transform duration-300 ease-in-out"
+>
+  <nav
+    class="mt-6 flex items-center justify-between gap-6 rounded-full border border-orange-600/20 bg-white bg-linear-to-br px-8 py-4 shadow-lg backdrop-blur-md transition-all duration-300 ease-in-out dark:bg-transparent dark:from-white/15 dark:to-white/0"
+  >
+    <div>
+      <Link to="/" aria-label="Afordin Logo">
+        <LogoIcon class="text-primary dark:text-white" />
+      </Link>
+    </div>
+    <div class="flex lg:hidden">
+      <button
+        type="button"
+        id="menu-toggle"
+        class="text-primary -m-2.5 inline-flex items-center justify-center rounded-md p-2.5 dark:text-white"
+      >
+        <span class="sr-only">Toggle menu</span>
+        <svg class="hamburger-icon size-10" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"></path>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Navigation menu for large screens -->
+    <div class="hidden lg:flex lg:items-center lg:gap-6">
+      {
+        links.map(({ name, to }, index) => (
+          <>
+            <Link
+              {to}
+              class="font-regular text-primary relative text-xl after:absolute after:bottom-0 after:left-1/2 after:h-0.5 after:w-0 after:bg-white after:transition-all after:duration-300 hover:after:left-0 hover:after:w-full dark:text-white"
+            >
+              {name}
+            </Link>
+            {index < links.length - 1 && <span class="text-[8px] text-gray-500 dark:text-gray-300">●</span>}
+          </>
+        ))
+      }
+    </div>
+
+    <!-- Social media icons for large screens -->
+    <div class="hidden items-center justify-center gap-4 lg:flex">
+      {
+        socialLinks.map(({ name, to }) => (
+          <Link to={to} external class="inline-block transition-transform duration-300 hover:scale-110">
+            <Icon {name} class="h-6 w-6" />
+          </Link>
+        ))
+      }
+    </div>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div
+    id="mobile-menu"
+    aria-label="Sections"
+    class="pointer-events-none fixed inset-0 z-50 flex transform items-center justify-center opacity-0 transition-all duration-50 lg:hidden"
+  >
+    <div
+      class="flex h-screen w-full flex-col gap-4 bg-linear-to-br from-purple-800 to-white shadow-lg backdrop-blur-md dark:from-purple-950/80 dark:to-black"
+    >
+      <div class="mt-6 flex justify-center p-2">
+        <button
+          type="button"
+          id="mobile-close-button"
+          class="inline-flex items-center justify-center rounded-md p-2 text-white"
+          aria-label="Close Menu"
+        >
+          <svg class="size-10" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+
+      <div class="flex flex-col items-center gap-8 py-16">
+        {
+          links.map(({ name, to }) => (
+            <Link
+              to={to}
+              class="relative text-xl font-semibold text-white after:absolute after:bottom-0 after:left-1/2 after:h-0.5 after:w-0 after:bg-white after:transition-all after:duration-300 hover:after:left-0 hover:after:w-full"
+            >
+              {name}
+            </Link>
+          ))
+        }
+      </div>
+
+      <div class="mt-auto flex flex-col items-center justify-center gap-6 border-t border-white/30 py-6">
+        <div>
+          <span>Diseñado y desarrollado por Comuafor ❤️</span>
+        </div>
+        <!-- Render social media icons (Github, Discord, YouTube, Twitch) in mobile menu -->
+        <div class="flex flex-row items-center justify-center gap-6">
+          {
+            socialLinks.map(({ name, to }) => (
+              <Link to={to} external class="inline-block transition-transform duration-300 hover:scale-110">
+                <Icon {name} class="h-6 w-6" />
+              </Link>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const menuToggle = document.getElementById('menu-toggle')
+    const mobileCloseButton = document.getElementById('mobile-close-button')
+    const mobileMenu = document.getElementById('mobile-menu')
+    const nav = document.querySelector('nav')
+    const header = document.querySelector('header')
+
+    let lastScrollY = window.scrollY
+    let isMenuOpen = false
+
+    const openMenu = () => {
+      isMenuOpen = true
+      if (mobileMenu) {
+        mobileMenu.classList.remove('opacity-0', 'scale-95', 'pointer-events-none')
+        mobileMenu.classList.add('opacity-100', 'scale-100', 'pointer-events-auto')
+      }
+      document.body.classList.add('overflow-hidden')
+    }
+
+    const closeMenu = () => {
+      isMenuOpen = false
+      if (mobileMenu) {
+        mobileMenu.classList.add('opacity-0', 'scale-95', 'pointer-events-none')
+        mobileMenu.classList.remove('opacity-100', 'scale-100', 'pointer-events-auto')
+      }
+      document.body.classList.remove('overflow-hidden')
+    }
+
+    if (menuToggle) {
+      menuToggle.addEventListener('click', openMenu)
+    }
+
+    if (mobileCloseButton) {
+      mobileCloseButton.addEventListener('click', closeMenu)
+    }
+
+    const mobileLinks = mobileMenu ? mobileMenu.querySelectorAll('a') : []
+    mobileLinks.forEach((link) => {
+      link.addEventListener('click', closeMenu)
+    })
+
+    if (nav && header) {
+      const initialMargin = 32
+      const scrolledMargin = 24
+
+      const handleScroll = () => {
+        const scrollPosition = window.scrollY
+        const scrollingDown = scrollPosition > lastScrollY
+
+        let newMargin = initialMargin
+
+        if (scrollPosition > 0) {
+          newMargin = scrolledMargin
+        }
+
+        nav.style.marginTop = `${newMargin}px`
+
+        if (scrollingDown && scrollPosition > 100 && !isMenuOpen) {
+          header.classList.add('-translate-y-full')
+        } else {
+          header.classList.remove('-translate-y-full')
+        }
+        lastScrollY = scrollPosition
+      }
+
+      handleScroll()
+      window.addEventListener('scroll', handleScroll)
+    }
+  })
+</script>

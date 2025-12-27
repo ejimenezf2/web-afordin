@@ -1,0 +1,12 @@
+---
+import { languages } from '@/i18n/ui.ts'
+import Link from '@/components/Link.astro'
+---
+
+<ul class="flex flex-row justify-center gap-2 lg:justify-start">
+  {
+    Object.entries(languages).map(([lang, label]) => (
+      <li>{lang === 'es' ? <Link to="/">{label}</Link> : <Link to={`/${lang}`}>{label}</Link>}</li>
+    ))
+  }
+</ul>
